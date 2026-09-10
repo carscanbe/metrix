@@ -1,4 +1,4 @@
-defmodule Metrix.Mixfile do
+defmodule Metrix.MixProject do
   use Mix.Project
 
   def project do
@@ -6,10 +6,11 @@ defmodule Metrix.Mixfile do
       app: :metrix,
       version: "1.0.0",
       description: description(),
-      elixir: ">= 1.3.0",
+      elixir: "~> 1.20",
       deps: deps(),
       package: package(),
-      source_url: "https://github.com/rwdaigle/metrix"
+      source_url: "https://github.com/rwdaigle/metrix",
+      docs: docs()
     ]
   end
 
@@ -17,7 +18,7 @@ defmodule Metrix.Mixfile do
   #
   # Type `mix help compile.app` for more information
   def application do
-    [applications: [:logger, :logfmt], mod: {Metrix, []}]
+    [extra_applications: [:logger], mod: {Metrix, []}]
   end
 
   # Dependencies can be Hex packages:
@@ -32,7 +33,8 @@ defmodule Metrix.Mixfile do
   defp deps do
     [
       {:logfmt, "~> 3.3"},
-      {:mix_test_watch, "~> 1.0", only: [:dev, :test], runtime: false}
+      {:mix_test_watch, "~> 1.4", only: [:dev, :test], runtime: false},
+      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false}
     ]
   end
 
@@ -57,6 +59,13 @@ defmodule Metrix.Mixfile do
       licenses: ["MIT"],
       links: %{"GitHub" => "https://github.com/rwdaigle/metrix"},
       files: ~w(mix.exs lib README.md)
+    ]
+  end
+
+  defp docs do
+    [
+      main: "readme",
+      extras: ["README.md"]
     ]
   end
 end

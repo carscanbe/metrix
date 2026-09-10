@@ -31,7 +31,7 @@ Add `metrix` to your applications in `mix.exs`:
 ```elixir
 def application do
   [mod: {YourApp, []},
-   applications: [..., :metrix]]
+   extra_applications: [..., :logger]]
 end
 ```
 
@@ -219,8 +219,7 @@ config :metrix, prefix: "my-prefix."
 Metrix writes to `Logger.info`. To adjust the output target, set the logger configuration in `config.exs`. For instance, to write to `stdout` (the Elixir default) with no timestamp line info, do:
 
 ```elixir
-config :logger, :console,
-  level: :info,
+config :logger, :default_formatter,
   format: "$message\n",
   colors: [enabled: false]
  ```
@@ -242,7 +241,7 @@ If you already have a Librato account, you can still stream your data to from He
 To develop and test locally we assume the use of the [asdf version manager](https://asdf-vm.com) and have a local `.tool-versions` to establish the correct versions of Erlang/Elixir for this project.
 
 ```bash
-asdf install elixir 1.16.3-otp-26
+asdf install elixir 1.20.3-otp-29
 ```
 
 Then run the local test suite:
@@ -273,6 +272,15 @@ Code contributors include:
 * [shosti](https://github.com/shosti)
 
 ## Changelog
+
+### Unreleased
+
+* Support Elixir 1.20 (OTP 29)
+* `Metrix.Mixfile` renamed to `Metrix.MixProject`
+* Require Elixir `~> 1.20`, use `extra_applications`
+* Replace deprecated `Logger.configure_backend/2` config with `:default_formatter`
+* Bump `mix_test_watch` to `~> 1.4` for Elixir 1.20 compatibility
+* Modernize supervision child specs, docs, and formatting
 
 ### 1.0.0
 

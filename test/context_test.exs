@@ -1,5 +1,4 @@
 defmodule ContextTest do
-
   use ExUnit.Case, async: false
   import MetrixTestHelper
 
@@ -31,7 +30,7 @@ defmodule ContextTest do
 
   test "initial context" do
     for context <- [%{"test_key" => "test_value"}, [test_key: "test_value"]] do
-      with_initial_context(context, fn(context) ->
+      with_initial_context(context, fn context ->
         assert Metrix.get_context() == Enum.into(context, %{})
       end)
     end
